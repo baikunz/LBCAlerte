@@ -23,6 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         && empty($alert->send_pushbullet)
         && empty($alert->send_notifymyandroid)
         && empty($alert->send_pushover)
+        && empty($alert->send_join)
     ) {
         $errors["send_type"] = "Vous devez sélectionner au moins un moyen de communication.";
     }

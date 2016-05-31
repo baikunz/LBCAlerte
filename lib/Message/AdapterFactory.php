@@ -27,6 +27,8 @@ class AdapterFactory
                 return new Adapter\Pushbullet($options);
             case "pushover":
                 return new Adapter\Pushover($options);
+            case "join":
+                return new Adapter\Join($options);
         }
         throw new \Exception("No service available");
     }

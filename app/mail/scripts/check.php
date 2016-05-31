@@ -80,7 +80,10 @@ class Main
             if ($from = $config->get("mailer", "from", null)) {
                 $this->_mailer->Sender = $from;
                 $this->_mailer->From = $from;
-                $this->_mailer->FromName = $from;
+            }
+
+            if ($fromName = $config->get("mailer", "fromName", null)) {
+                $this->_mailer->FromName = $fromName;
             }
         }
         $this->_mailer->isHTML(true);
@@ -383,6 +386,7 @@ class Main
                     || $alert->send_pushbullet
                     || $alert->send_notifymyandroid
                     || $alert->send_pushover
+                    || $alert->send_join
                 )) {
                     if ($countAds < 5) { // limite à 5 SMS
                         foreach ($newAds AS $id => $ad) {

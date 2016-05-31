@@ -245,6 +245,48 @@
         <?php endif; ?>
     </dl>
 
+    <h2 id="configJoin" class="formbox">Configuration alerte via Join</h2>
+    <dl id="configJoin-content" style="display: <?php echo !empty($form_values["notification"]["join"]["token"]) ? "block" : "none"; ?>;">
+        <dt>
+            <label for="join_token">Clé application</label>
+        </dt>
+        <dd>
+            <input type="text" id="join_token" name="notification[join][token]" value="<?php
+            echo htmlspecialchars($form_values["notification"]["join"]["token"]);
+            ?>" />
+            <?php if (isset($errors["notification"]["join"]["token"])) : ?>
+                <p class="error"><?php echo $errors["notification"]["join"]["token"]; ?></p>
+            <?php endif; ?>
+        </dd>
+        <dt>
+            <label for="join_deviceId">Device Id</label>
+        </dt>
+        <dd>
+            <input type="text" id="join_deviceId" name="notification[join][deviceId]" value="<?php
+            echo htmlspecialchars($form_values["notification"]["join"]["deviceId"]);
+            ?>" />
+            <?php if (isset($errors["notification"]["join"]["deviceId"])) : ?>
+                <p class="error"><?php echo $errors["notification"]["join"]["deviceId"]; ?></p>
+            <?php endif; ?>
+        </dd>
+        <dt style="border: none;">
+            <input type="submit" name="testJoin" value="Effectuer un test d'envoi de message" />
+        </dt>
+        <?php if (empty($errors) && !empty($_POST["testJoin"])) : ?>
+            <dd>
+                <?php if (isset($errorsTest["join"])) : ?>
+                    <p style="font-weight: bold; color: #AB0000;"><?php
+                        echo htmlspecialchars($errorsTest["join"]);
+                        ?></p>
+                <?php else: ?>
+                    <p style="font-weight: bold; color: #333399;">Vous devriez recevoir une notification contenant le message suivant:
+                        « La notification Join est fonctionnelle ».</p>
+                    <p style="font-weight: bold; color: #339933;">Pensez à confirmer la configuration en cliquant sur "Enregistrer".</p>
+                <?php endif; ?>
+            </dd>
+        <?php endif; ?>
+    </dl>
+
     <p><input type="submit" value="Enregistrer" />
         | <a href="?mod=user&amp;a=settings">annuler les modifications</a></p>
 </form>

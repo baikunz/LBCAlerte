@@ -35,6 +35,7 @@
                 || $notification["pushbullet"]
                 || $notification["notifymyandroid"]
                 || $notification["pushover"]
+                || $notification["join"]
                 ) : ?>
             <th style="width: 140px">Envoyer par email</th>
             <?php if ($notification["freeMobile"]) : ?>
@@ -51,6 +52,9 @@
             <?php endif; ?>
             <?php if ($notification["pushover"]) : ?>
             <th style="width: 140px">Pushover</th>
+            <?php endif; ?>
+            <?php if ($notification["join"]) : ?>
+                <th style="width: 140px">Join</th>
             <?php endif; ?>
             <?php endif; ?>
             <th style="width: 70px">Actif</th>
@@ -94,6 +98,7 @@
                 || $notification["pushbullet"]
                 || $notification["notifymyandroid"]
                 || $notification["pushover"]
+                || $notification["join"]
                 ) : ?>
             <td>
                 <a href="?mod=mail&amp;a=toggle_status&amp;s=send_mail&amp;id=<?php echo $alert->id;
@@ -135,6 +140,13 @@
                     ?>"><img src="static/images/<?php
                     echo !$alert->send_pushover?"disable":"enable"; ?>.png" alt="" /></a>
             </td>
+            <?php endif; ?>
+            <?php if ($notification["join"]) : ?>
+                <td>
+                    <a href="?mod=mail&amp;a=toggle_status&amp;s=send_join&amp;id=<?php echo $alert->id;
+                    ?>"><img src="static/images/<?php
+                        echo !$alert->send_join?"disable":"enable"; ?>.png" alt="" /></a>
+                </td>
             <?php endif; ?>
             <td>
                 <a href="?mod=mail&amp;a=toggle_status&amp;s=suspend&amp;id=<?php echo $alert->id;

@@ -21,6 +21,12 @@
                 echo htmlspecialchars($options["from"]);
             ?>" size="40" />
         </dd>
+        <dt style="clear: both;"><label for="fromName">Nom à indiquer comme expéditeur</label></dt>
+        <dd>
+            <input type="text" id="fromName" name="fromName" value="<?php
+            echo htmlspecialchars($options["fromName"]);
+            ?>" size="40" />
+        </dd>
         <dt style="margin-bottom: 5px;"><label>Serveur SMTP externe</label></dt>
         <dd style="float: left;">
             &nbsp;<label for="host">Hôte / IP :</label><br />

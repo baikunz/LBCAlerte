@@ -5,6 +5,7 @@ $options = array(
     "username" => "", "password" => "",
     "secure" => "",
     "from" => "",
+    "fromName" => "",
     "testMail" => ""
 );
 if ($config->hasSection("mailer")) {
@@ -13,6 +14,9 @@ if ($config->hasSection("mailer")) {
     }
     if ($from = $config->get("mailer", "from", null)) {
         $options["from"] = $from;
+    }
+    if ($fromName = $config->get("mailer", "fromName", null)) {
+        $options["fromName"] = $fromName;
     }
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -50,8 +54,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             $mailer->clearAddresses();
             $mailer->addAddress($_POST["testMail"]);
-            if ($options["from"]) {
-                $mailer->FromName = $options["from"];
+            if ($options["fromName"]) {
+                $mailer->FromName = $options["fromName"];
             }
             $mailer->Subject = "Test d'envoi de mail";
             $mailer->Body = "Bravo.\nVotre configuration mail est validée.";
@@ -69,6 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             "secure" => $options["secure"]
         ));
         $config->set("mailer", "from", $options["from"]);
+        $config->set("mailer", "fromName", $options["fromName"]);
         $config->save();
         header("LOCATION: ?mod=admin&a=mail");
         exit;

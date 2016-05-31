@@ -29,7 +29,7 @@ $alertCategories = $alert->getCategories();
             <p class="error"><?php echo $errors["title"]; ?></p>
             <?php endif; ?>
         </dd>
-        <?php if ($userAuthed->hasSMSFreeMobile() || $userAuthed->hasSMSOvh() || $userAuthed->hasPushbullet()) : ?>
+        <?php if ($userAuthed->hasSMSFreeMobile() || $userAuthed->hasSMSOvh() || $userAuthed->hasPushbullet() || $userAuthed->hasJoin()) : ?>
         <dt>
             <label>Comment souhaitez-vous recevoir les alertes</label>
         </dt>
@@ -40,6 +40,7 @@ $alertCategories = $alert->getCategories();
             <input type="hidden" name="send_pushbullet" value="0" />
             <input type="hidden" name="send_notifymyandroid" value="0" />
             <input type="hidden" name="send_pushover" value="0" />
+            <input type="hidden" name="send_join" value="0" />
             <label for="alert_mail">
                 <input id="alert_mail" type="checkbox" name="send_mail" value="1"<?php
                     echo $alert->send_mail?' checked="checked"':''
@@ -85,6 +86,14 @@ $alertCategories = $alert->getCategories();
                 ?> />
                 par Pushover
             </label>
+            <?php endif; ?>
+            <?php if ($userAuthed->hasJoin()) : ?>
+                <label for="alert_join">
+                    <input id="alert_join" type="checkbox" name="send_join" value="1"<?php
+                    echo $alert->send_join?' checked="checked"':''
+                    ?> />
+                    par Join
+                </label>
             <?php endif; ?>
             <?php if (isset($errors["send_type"])) : ?>
             <p class="error"><?php echo $errors["send_type"]; ?></p>

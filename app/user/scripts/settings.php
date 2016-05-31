@@ -29,6 +29,10 @@ $form_values["notification"] = array_replace_recursive(array(
         "token" => "",
         "user_key" => "",
     ),
+    "join" => array(
+        "token" => "",
+        "deviceId" => "group.all",
+    ),
 ), $params["notification"]);
 
 $errors = array();
@@ -108,6 +112,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $sender->send("La notification Pushover est fonctionnelle");
                 } catch (Exception $e) {
                     $errorsTest["pushover"] = "Erreur lors de l'envoi de la notification : (".$e->getCode().") ".$e->getMessage();
+                }
+            }
+        } elseif (!empty($_POST["testJoin"])) {
+            if (empty($_POST["notification"]["join"]["token"])) {
+                $errors["notification"]["join"]["token"] = "Veuillez renseigner la clé application.";
+            } elseif (empty($_POST["notification"]["join"]["deviceId"])) {
+                $errors["notification"]["join"]["deviceId"] = "Veuillez renseigner l'id device.";
+            } else {
+                $sender = \Message\AdapterFactory::factory("join", $_POST["notification"]["join"]);
+                try {
+                    $sender->send("La notification Join est fonctionnelle");
+                } catch (Exception $e) {
+                    $errorsTest["join"] = "Erreur lors de l'envoi de la notification : (".$e->getCode().") ".$e->getMessage();
                 }
             }
         } else {

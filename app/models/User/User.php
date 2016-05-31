@@ -126,6 +126,15 @@ class User
     }
 
     /**
+     * Retourne vrai si la notification Join est activée.
+     * @return boolean
+     */
+    public function hasJoin()
+    {
+        return false != $this->getOption("notification.join");
+    }
+
+    /**
      * Indique si l'utilisateur est administrateur.
      * @return boolean
      */
