@@ -393,7 +393,7 @@ class Main
                             $ad = $ads[$id]; // récupère l'objet.
                             $url = $ad->getLink();
                             if (false !== strpos($url, "leboncoin")) {
-                                $url = "https://mobile.leboncoin.fr/vi/".$ad->getId().".htm";
+                                $url = "https://leboncoin.fr/vi/".$ad->getId().".htm";
                             }
                             curl_setopt($curlTinyurl, CURLOPT_URL, "http://tinyurl.com/api-create.php?url=".$url);
                             if ($url = curl_exec($curlTinyurl)) {
